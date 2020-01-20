@@ -12,10 +12,11 @@ public class Main {
 
         // create a new coder
         Coder tom = new Coder(501, "Tom", "Jones", 2000);
-        cd.save(tom);
+        cd.save(tom); // chiamata al metodo save, cambiamento anche nel DB e non solo nella RAM
+     
 
         // get a coder
-        Optional<Coder> opt = cd.get(501);
+        Optional<Coder> opt = cd.get(501); // optional (java 8) per cercare di fare a meno dei null. E' una sorta di collection in cui dentro ci può essere un valore reference o 0. Ritorna un coder che c'è o non c'è. Questo perchè get potrebbe ritornare un null.
         if (opt.isPresent()) {
             System.out.println("Coder 501: " + opt.get());
         } else {

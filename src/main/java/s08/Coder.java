@@ -1,6 +1,6 @@
 package s08;
 
-public class Coder {
+public class Coder { // informazioni che ci interessa prendere dal db. CLASSE JAVA BEAN
     private String firstName;
     private String lastName;
     private int salary;

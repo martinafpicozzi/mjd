@@ -30,11 +30,12 @@ public class Selector {
 	public List<Coder> getCoders() throws SQLException {
 		try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD); //
 				Statement stmt = conn.createStatement()) {
-			ResultSet rs = stmt.executeQuery("SELECT first_name, last_name, salary FROM coders ORDER BY 1");
+			ResultSet rs = stmt.executeQuery("SELECT first_name, last_name, salary FROM coders ORDER BY 1"); // senza ; alla fine dello statement MySql, ci pensa JDBC
 
-			List<Coder> results = new ArrayList<>();
-			while (rs.next()) {
-				results.add(new Coder(rs.getString(1), rs.getString(2), rs.getInt(3)));
+			List<Coder> results = new ArrayList<>(); // faccio una lista di coder (Java Bean)
+			while (rs.next()) { // per ogni riga del rs
+				results.add(new Coder(rs.getString(1), rs.getString(2), rs.getInt(3))); // aggiungo un nuovo Coder, con gli elmeneti del rs
+//			Coder coder = new Coder (rs.getString(1), rs.getString(2), rs.getInt(3))); equivalente
 			}
 
 			return results;
@@ -45,7 +46,7 @@ public class Selector {
 		try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD); //
 				Statement stmt = conn.createStatement()) {
 			String query = "SELECT first_name, last_name, salary FROM coders WHERE salary >= " + lower
-					+ " ORDER BY 3 DESC";
+					+ " ORDER BY 3 DESC"; // >= del parametro lower passato
 
 			ResultSet rs = stmt.executeQuery(query);
 
@@ -60,7 +61,7 @@ public class Selector {
 
 	public static void main(String[] args) {
 		try {
-			Selector sample = new Selector();
+			Selector sample = new Selector(); // per chiamare un metodo di istanza devo avere degli oggetti
 
 			System.out.println("Coder names are: " + sample.getCoderNames());
 			System.out.println("Coders are: " + sample.getCoders());
